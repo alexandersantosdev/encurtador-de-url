@@ -13,8 +13,8 @@ const MyLinks = () => {
       <Menu />
       <Title>Meus Links</Title>
       <ListLinks
-        data={[{ id: 1, link: "test.com" }]}
-        keyStractor={(item) => String(item.id)}
+        data={[{}]}
+        keyExtractor={(item) => `${item.id}`}
         renderItem={({ item }) => <ListItem data={item} />}
         contentContainerStyle={{ paddingBottom: 20 }}
         showVerticalScrollIndicator={false}

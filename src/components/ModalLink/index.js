@@ -19,16 +19,16 @@ import {
 import Clipboard from "expo-clipboard";
 import { Feather } from "@expo/vector-icons";
 
-const ModalLink = ({ onClose }) => {
+const ModalLink = ({ onClose, data }) => {
   const copyLink = () => {
-    Clipboard.setString("https://educacao.piraquara.pr.go.br");
+    Clipboard.setString(data.link);
     alert("Link copiado");
   };
 
   const handleShare = async () => {
     try {
       const result = await Share.share({
-        message: `Link: https://educacao.piraquara.pr.gov.br`,
+        message: `Link: ${data.link}`,
       });
 
       if (result.action === Share.sharedAction) {
@@ -61,9 +61,9 @@ const ModalLink = ({ onClose }) => {
         </Header>
         <LinkArea>
           <Title>Link Encurtado</Title>
-          <LongUrl numberOfLines={1}></LongUrl>
+          <LongUrl numberOfLines={1}>{data.long_url}</LongUrl>
           <ShortLinkArea activeOpacity={1} onPress={copyLink}>
-            <ShortLinkUrl numberOfLines={1}></ShortLinkUrl>
+            <ShortLinkUrl numberOfLines={1}>{data.link}</ShortLinkUrl>
             <TouchableOpacity onPress={copyLink}>
               <Feather name="copy" color="#fff" size={30} />
             </TouchableOpacity>

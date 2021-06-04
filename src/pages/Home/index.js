@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -12,6 +13,8 @@ import StatusBarPage from "../../components/StatusBarPage";
 import Menu from "../../components/Menu";
 
 import { Feather } from "@expo/vector-icons";
+
+import api from "../../services/api";
 
 import {
   BoxIcon,
@@ -28,11 +31,29 @@ import {
 import ModalLink from "../../components/ModalLink";
 
 const Home = () => {
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
+  const [data, setData] = useState({});
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleShortLink = () => {
-    setModalVisible(true);
+  const handleShortLink = async () => {
+    setLoading(true);
+    try {
+      const response = await api.post("/shorten", {
+        long_url: input,
+      });
+
+      setData(response.data);
+      setModalVisible(true);
+      Keyboard.dismiss();
+      setLoading(false);
+      setInput("");
+    } catch (error) {
+      console.log("Deu ruim " + error);
+      Keyboard.dismiss();
+      setLoading(false);
+      setInput("");
+    }
   };
 
   return (
@@ -72,12 +93,16 @@ const Home = () => {
               />
             </ContainerInput>
             <ButtonLink onPress={() => handleShortLink()}>
-              <ButtonLinkText>Gerar Link</ButtonLinkText>
+              {loading ? (
+                <ActivityIndicator color="#121212" size={24} />
+              ) : (
+                <ButtonLinkText>Gerar Link</ButtonLinkText>
+              )}
             </ButtonLink>
           </ContainerContent>
         </KeyboardAvoidingView>
         <Modal visible={modalVisible} transparent animationType="slide">
-          <ModalLink onClose={() => setModalVisible(false)} />
+          <ModalLink onClose={() => setModalVisible(false)} data={data} />
         </Modal>
       </LinearGradient>
     </TouchableWithoutFeedback>

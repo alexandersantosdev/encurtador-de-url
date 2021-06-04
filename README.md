@@ -10,6 +10,8 @@
 
 ![Tela principal](https://github.com/alexandersantosdev/encurtador-de-url/blob/main/tela_principal.jpg)
 
+![Menu](https://github.com/alexandersantosdev/encurtador-de-url/blob/main/menu.jpg)
+
 ![Modal](https://github.com/alexandersantosdev/encurtador-de-url/blob/main/modal.jpg)
 
 ![Lista de links](https://github.com/alexandersantosdev/encurtador-de-url/blob/main/lista_links.jpg)

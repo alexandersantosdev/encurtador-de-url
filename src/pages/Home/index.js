@@ -15,6 +15,7 @@ import Menu from "../../components/Menu";
 import { Feather } from "@expo/vector-icons";
 
 import api from "../../services/api";
+import {saveLink} from '../../utils/storeLinks';
 
 import {
   BoxIcon,
@@ -45,14 +46,20 @@ const Home = () => {
 
       setData(response.data);
       setModalVisible(true);
+
+      saveLink("links", response.data);
+
       Keyboard.dismiss();
       setLoading(false);
       setInput("");
+
     } catch (error) {
+
       console.log("Deu ruim " + error);
       Keyboard.dismiss();
       setLoading(false);
       setInput("");
+
     }
   };
 

@@ -14,4 +14,14 @@ export const Title = styled.Text`
   color: #fff;
 `;
 
+export const ContainerEmpty = styled.View`
+  margin-top: 15%;
+  align-items: center;
+`;
+
+export const WarningText = styled.Text`
+color: #fff;
+font-size: 17px;
+`;
+
 export const ListLinks = styled.FlatList``;
